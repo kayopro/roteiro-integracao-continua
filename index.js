@@ -1,38 +1,37 @@
+// "Commit 3 - Mais Extract Functions"
+
 function gerarFaturaStr(fatura, pecas) {
   // função extraída
-  function calcularTotalApresentacao(apre, peca) {
-    let total = 0;
-    switch (peca.tipo) {
-      case "tragedia":
-        total = 40000;
-        if (apre.aud < 30) {
-          total += 1000 * (apre.aud - 30);
-        }
-        break;
-      case "comedia":
-        total = 30000;
-        if (apre.aud < 20) {
-          total += 10000 + 500 * (apre.aud - 20);
-        }
-        total += 300 * apre.aud;
-        break;
-      default:
-        throw new Error(`Tipo de peça desconhecido: ${peca.tipo}`);
-    }
-    return total;
+  function calcularCredito(apre) {
+    let creditos = 0;
+    creditos += Math.max(apre.audiencia - 30, 0);
+    if (getPeca(apre).tipo === "comedia")
+      creditos += Math.floor(apre.audiencia / 5);
+    return creditos;
   }
+
+  // função extraída
+  function formatarMoeda(valor) {
+    return new Intl.NumberFormat("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+      minimumFractionDigits: 2,
+    }).format(valor / 100);
+  }
+
+  let result = "";
+  let volumeCreditos = 0;
 
   for (let apre of fatura) {
+    let total = calcularTotalApresentacao(apre);
+    let creditos = calcularCredito(apre);
     let peca = getPeca(apre.pecaID, pecas);
-    let total = calcularTotalApresentacao(apre, peca);
-    result += `${peca.nome}: R$ ${formatarValor(total / 100)} (${
-      apre.aud
+    result += `${peca.nome}: R$ ${formatarMoeda(total)} (${
+      apre.audiencia
     } assentos)\n`;
-    volumeCreditos += Math.max(apre.aud - 30, 0);
-    if ("comedia" === peca.tipo) volumeCreditos += Math.floor(apre.aud / 5);
+    volumeCreditos += creditos;
   }
-
-  result += `Valor total: R$ ${formatarValor(total / 100)}\n`;
+  result += `Valor total: R$ ${formatarMoeda(total)}\n`;
   result += `Créditos acumulados: ${volumeCreditos} \n`;
   return result;
 }
