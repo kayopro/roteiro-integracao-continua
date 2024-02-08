@@ -1,16 +1,7 @@
-// "Commit 3 - Mais Extract Functions"
+//"Commit 4 - Separando Apresentação dos Cálculos"
 
 function gerarFaturaStr(fatura, pecas) {
-  // função extraída
-  function calcularCredito(apre) {
-    let creditos = 0;
-    creditos += Math.max(apre.audiencia - 30, 0);
-    if (getPeca(apre).tipo === "comedia")
-      creditos += Math.floor(apre.audiencia / 5);
-    return creditos;
-  }
-
-  // função extraída
+  // função aninhada
   function formatarMoeda(valor) {
     return new Intl.NumberFormat("pt-BR", {
       style: "currency",
@@ -19,19 +10,32 @@ function gerarFaturaStr(fatura, pecas) {
     }).format(valor / 100);
   }
 
-  let result = "";
-  let volumeCreditos = 0;
-
-  for (let apre of fatura) {
-    let total = calcularTotalApresentacao(apre);
-    let creditos = calcularCredito(apre);
-    let peca = getPeca(apre.pecaID, pecas);
-    result += `${peca.nome}: R$ ${formatarMoeda(total)} (${
-      apre.audiencia
-    } assentos)\n`;
-    volumeCreditos += creditos;
+  // corpo principal
+  let faturaStr = `Fatura ${fatura.cliente}\n`;
+  for (let apre of fatura.apresentacoes) {
+    faturaStr += `  ${getPeca(apre).nome}: ${formatarMoeda(
+      calcularTotalApresentacao(apre)
+    )} (${apre.audiencia} assentos)\n`;
   }
-  result += `Valor total: R$ ${formatarMoeda(total)}\n`;
-  result += `Créditos acumulados: ${volumeCreditos} \n`;
-  return result;
+  faturaStr += `Valor total: ${formatarMoeda(calcularTotalFatura())}\n`;
+  faturaStr += `Créditos acumulados: ${calcularTotalCreditos()} \n`;
+  return faturaStr;
+
+  // função aninhada
+  function calcularTotalFatura() {
+    let total = 0;
+    for (let apre of fatura.apresentacoes) {
+      total += calcularTotalApresentacao(apre);
+    }
+    return total;
+  }
+
+  // função aninhada
+  function calcularTotalCreditos() {
+    let creditos = 0;
+    for (let apre of fatura.apresentacoes) {
+      creditos += calcularCredito(apre);
+    }
+    return creditos;
+  }
 }
