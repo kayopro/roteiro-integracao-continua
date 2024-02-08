@@ -1,7 +1,6 @@
 # Disciplina: Engenharia de Software
 
-Nome: DIOGO GABRIEL ROSA SANTOS / 2022011185
-Nome: JOSÉ KAYO BEZERRA DA SILVA / 2022012638
+Alunos: JOSÉ KAYO / DIOGO GABRIEL
 
 # Replicação do roteiro sobre Refactoring disponível neste link, o qual é disponibilizado pelo livro Engenharia de Software Moderna.
 
