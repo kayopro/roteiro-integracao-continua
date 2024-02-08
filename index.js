@@ -31,6 +31,7 @@ function gerarFaturaStr(fatura, pecas) {
     volumeCreditos += Math.max(apre.aud - 30, 0);
     if ("comedia" === peca.tipo) volumeCreditos += Math.floor(apre.aud / 5);
   }
+
   result += `Valor total: R$ ${formatarValor(total / 100)}\n`;
   result += `Créditos acumulados: ${volumeCreditos} \n`;
   return result;
