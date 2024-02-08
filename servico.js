@@ -44,11 +44,4 @@ module.exports = class ServicoCalculoFatura {
     return total;
   }
 
-  calcularTotalFatura(apresentacoes) {
-    let total = 0;
-    for (let apre of apresentacoes) {
-      total += this.calcularTotalApresentacao(apre);
-    }
-    return total;
-  }
-};
+  
