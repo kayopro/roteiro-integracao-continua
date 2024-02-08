@@ -1,5 +1,4 @@
 // "Commit 9 - Criando Arquivos"
-
 const { readFileSync } = require("fs");
 
 var Repositorio = require("./repositorio.js");
