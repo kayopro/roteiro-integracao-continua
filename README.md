@@ -1,7 +1,9 @@
-# Roteiro-integracao-continua
-Roteiro de Refactoring
+# Disciplina: Engenharia de Software
 
-# 3) Leia e replique o roteiro sobre Refactoring disponível neste link, o qual é disponibilizado pelo livro Engenharia de Software Moderna.
+Nome: DIOGO GABRIEL ROSA SANTOS / 2022011185
+Nome: JOSÉ KAYO BEZERRA DA SILVA / 2022012638
+
+# Replicação do roteiro sobre Refactoring disponível neste link, o qual é disponibilizado pelo livro Engenharia de Software Moderna.
 
 a) Insira abaixo link do repositório no GitHub com o seu repositório de acordo com o
 roteiro sugerido. Após cada etapa, dê um COMMIT & PUSH, adicionando uma
