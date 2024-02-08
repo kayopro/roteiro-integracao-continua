@@ -25,13 +25,7 @@ class ServicoCalculoFatura {
     return creditos;
   }
 
-  calcularTotalCreditos(apresentacoes) {
-    let creditos = 0;
-    for (let apre of apresentacoes) {
-      creditos += this.calcularCredito(apre);
-    }
-    return creditos;
-  }
+  
 
   calcularTotalApresentacao(apre) {
     let total = 0;
